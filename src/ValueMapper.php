@@ -28,28 +28,28 @@ class ValueMapper
 {
     use ArrayTrait;
 
-    const TYPE_BOOL = 'BOOL';
-    const TYPE_BOOLEAN = 'BOOLEAN';
-    const TYPE_INT64 = 'INT64';
-    const TYPE_INTEGER = 'INTEGER';
-    const TYPE_FLOAT64 = 'FLOAT64';
-    const TYPE_FLOAT = 'FLOAT';
-    const TYPE_NUMERIC = 'NUMERIC';
-    const TYPE_BIGNUMERIC = 'BIGNUMERIC';
-    const TYPE_STRING = 'STRING';
-    const TYPE_BYTES = 'BYTES';
-    const TYPE_DATE = 'DATE';
-    const TYPE_DATETIME = 'DATETIME';
-    const TYPE_TIME = 'TIME';
-    const TYPE_TIMESTAMP = 'TIMESTAMP';
-    const TYPE_ARRAY = 'ARRAY';
-    const TYPE_STRUCT = 'STRUCT';
-    const TYPE_RECORD = 'RECORD';
-    const TYPE_GEOGRAPHY = 'GEOGRAPHY';
-    const TYPE_JSON = 'JSON';
+    public const TYPE_BOOL = 'BOOL';
+    public const TYPE_BOOLEAN = 'BOOLEAN';
+    public const TYPE_INT64 = 'INT64';
+    public const TYPE_INTEGER = 'INTEGER';
+    public const TYPE_FLOAT64 = 'FLOAT64';
+    public const TYPE_FLOAT = 'FLOAT';
+    public const TYPE_NUMERIC = 'NUMERIC';
+    public const TYPE_BIGNUMERIC = 'BIGNUMERIC';
+    public const TYPE_STRING = 'STRING';
+    public const TYPE_BYTES = 'BYTES';
+    public const TYPE_DATE = 'DATE';
+    public const TYPE_DATETIME = 'DATETIME';
+    public const TYPE_TIME = 'TIME';
+    public const TYPE_TIMESTAMP = 'TIMESTAMP';
+    public const TYPE_ARRAY = 'ARRAY';
+    public const TYPE_STRUCT = 'STRUCT';
+    public const TYPE_RECORD = 'RECORD';
+    public const TYPE_GEOGRAPHY = 'GEOGRAPHY';
+    public const TYPE_JSON = 'JSON';
 
-    const DATETIME_FORMAT = 'Y-m-d H:i:s.u';
-    const DATETIME_FORMAT_INSERT = 'Y-m-d\TH:i:s.u';
+    public const DATETIME_FORMAT = 'Y-m-d H:i:s.u';
+    public const DATETIME_FORMAT_INSERT = 'Y-m-d\TH:i:s.u';
 
     /**
      * @var bool $returnInt64AsObject If true, 64 bit integers will be returned
@@ -201,6 +201,10 @@ class ValueMapper
                     ? $this->assocArrayToParameter($value)
                     : $this->arrayToParameter($value);
 
+                break;
+            case 'NULL':
+                $pType['type'] = self::TYPE_INT64;
+                $pValue['value'] = null;
                 break;
             default:
                 throw new \InvalidArgumentException(sprintf(
